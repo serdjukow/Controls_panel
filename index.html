@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Controls panel</title>
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<div class="header__body">
+				<div class="header__column column--left">
+					<div class="header__logo">
+						<img src="images/logo.svg" alt="">
+					</div>
+					<span>Controls panel</span>
+				</div>
+				<div class="header__column column--right">
+					<div class="header__counter currentDate">
+						<span class="header__icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+								fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+								stroke-linejoin="round"
+								class="feather feather-calendar w-4 h-4 z-10 absolute my-auto inset-y-0 ml-3 left-0">
+								<rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+								<line x1="16" y1="2" x2="16" y2="6"></line>
+								<line x1="8" y1="2" x2="8" y2="6"></line>
+								<line x1="3" y1="10" x2="21" y2="10"></line>
+							</svg>
+						</span>
+						<div class="currentDate-count">
+						</div>
+					</div>
+					<div class="header__counter countUsers">
+						<span class="header__icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+								fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+								stroke-linejoin="round" class="feather feather-users">
+								<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+								<circle cx="9" cy="7" r="4"></circle>
+								<path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+								<path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+							</svg>
+						</span>
+						<div class="countUsers-count">
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="page">
+			<section class="app">
+				<div class="app__body">
+					<div class="app__column column--left">
+						<div id="users" class="app__users">
+						</div>
+					</div>
+					<div class="app__column column--right">
+						<div id="userFullInfo" class="user-full-info">
+						</div>
+
+						<div class="users-resources">
+
+							<div class="resources__panel">
+								<div data-atribute="users-todos" class="resources__panel-button active">
+									<span class="resources__icon">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+											viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+											stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit">
+											<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+											<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+										</svg>
+									</span>
+									Todos
+									<span class="todos-count"></span>
+								</div>
+								<div data-atribute="users-posts" class="resources__panel-button">
+									<span class="resources__icon">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+											viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+											stroke-linecap="round" stroke-linejoin="round"
+											class="feather feather-file-text">
+											<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+											<polyline points="14 2 14 8 20 8"></polyline>
+											<line x1="16" y1="13" x2="8" y2="13"></line>
+											<line x1="16" y1="17" x2="8" y2="17"></line>
+											<polyline points="10 9 9 9 8 9"></polyline>
+										</svg>
+									</span>
+									Posts
+									<span class="posts-count"></span>
+								</div>
+								<div data-atribute="users-albums" class="resources__panel-button">
+									<span class="resources__icon">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+											viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+											stroke-linecap="round" stroke-linejoin="round"
+											class="feather feather-trello">
+											<rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+											<rect x="7" y="7" width="3" height="9"></rect>
+											<rect x="14" y="7" width="3" height="5"></rect>
+										</svg>
+									</span>
+									Albums
+									<span class="albums-count"></span>
+								</div>
+							</div>
+							<div class="users-resources__body">
+								<div id="users-todos" class="users-resources__item users-todos toShow"></div>
+								
+								<div id="users-albums" class="users-resources__item users-albums"></div>
+								
+								<div id="users-posts" class="users-resources__item users-posts"></div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+	</div>
+	<script src="js/main.js"></script>
+</body>
+
+</html>
