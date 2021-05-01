@@ -424,3 +424,54 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 	text-decoration: line-through;
 	color: #8a8a8a;
 }
+
+.photos-gallery {
+	display: none;
+	flex-wrap: wrap;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #fff;
+}
+.user-photo {
+	position: relative;	
+	width: 150px;
+	height: 150px;
+	text-align: center;	
+	box-sizing: border-box;
+	overflow: hidden;
+	
+	// .user-photo__img
+
+	&__img {
+		img {
+			width: 100%;
+		}
+	}
+
+	// .user-photo__title
+
+	&__title {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: rgba(#1c3faa, .9);
+		color:#fff;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		text-transform: capitalize;
+		font-size: 14px;
+		padding: 10px;
+		cursor: pointer;
+		user-select: none;
+		letter-spacing: 1.2px;
+		transition: background .3s ease-in-out;
+		&:hover {
+			background: rgba(#1c3faa, .0);
+			color: transparent;
+		}
+	}
+}

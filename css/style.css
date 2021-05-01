@@ -490,3 +490,62 @@ body {
   text-decoration: line-through;
   color: #8a8a8a;
 }
+
+.photos-gallery {
+  display: none;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+}
+
+.user-photo {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
+}
+
+.user-photo__img img {
+  width: 100%;
+}
+
+.user-photo__title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(28, 63, 170, 0.9);
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-transform: capitalize;
+  font-size: 14px;
+  padding: 10px;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  letter-spacing: 1.2px;
+  -webkit-transition: background .3s ease-in-out;
+  transition: background .3s ease-in-out;
+}
+
+.user-photo__title:hover {
+  background: rgba(28, 63, 170, 0);
+  color: transparent;
+}

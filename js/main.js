@@ -1,3 +1,7 @@
+const body = document.querySelector('body')
+const photosGallery = document.querySelector('#photos-gallery')
+const albumsRow = document.querySelector('#users-albums')
+
 const currentDate = document.querySelector('.currentDate-count')
 let Data = new Date();
 let Year = Data.getFullYear();
@@ -42,8 +46,11 @@ const renderUsers = (users) => {
 const addActive = (el) => {
 	if (!el.classList.contains('active')) {
 		el.classList.add('active')
+		let currentUserId = `${el.id}`
+		localStorage.setItem("UserKey", JSON.stringify(currentUserId))
 	}
 }
+
 const removeActive = () => {
 	const usersList = document.querySelectorAll('.user')
 	for (let item of usersList) {
@@ -61,6 +68,7 @@ const countUsers = (users) => {
 }
 
 const userListener = () => {
+	let currentUserId = JSON.parse(localStorage.getItem('UserKey'))
 	const usersList = document.querySelectorAll('.user')
 	for (let item of usersList) {
 		item.addEventListener('click', (event) => {
@@ -72,8 +80,22 @@ const userListener = () => {
 			getUsersInfo(id)
 			getTodos(id)
 			getAlbums(id)
-			getPosts(id)
+			getPosts(id)			
 		})
+	}
+	if (currentUserId) {
+		removeActive()
+		const usersListawd = document.querySelectorAll('.app__user')
+		for (let user of usersListawd) {
+			const [, userId] = user.id.split("_")
+			if (user.id == currentUserId) {
+				user.classList.add('active')
+				getUsersInfo(userId)
+				getTodos(userId)
+				getAlbums(userId)
+				getPosts(userId)
+			}
+		}
 	}
 }
 
@@ -120,19 +142,18 @@ const renderToDoList = (todoList) => {
 		const todoRow = document.querySelector('#users-todos')
 		if (todo.completed) {
 			todoRow.innerHTML +=
-			`
+				`
 			<div class="user-todo completed">${todo.title}</div>
 			`
 		}
 		else {
 			todoRow.innerHTML +=
-			`
+				`
 			<div class="user-todo">${todo.title}</div>
 			`
 		}
 	})
 }
-
 
 const getAlbums = async (id) => {
 	const response = await fetch(
@@ -143,19 +164,35 @@ const getAlbums = async (id) => {
 }
 getAlbums(1)
 const renderAlbums = (albums) => {
-	const todos = document.querySelector('#users-albums')
-	const todosCounter = document.querySelector('.albums-count')
-	todosCounter.innerHTML = albums.length
-	todos.innerHTML = ''
+	const albumsRow = document.querySelector('#users-albums')
+	const albumsCounter = document.querySelector('.albums-count')
+	albumsCounter.innerHTML = albums.length
+	albumsRow.innerHTML = ''
 	albums.forEach(album => {
-		document
-			.querySelector('#users-albums')
-			.innerHTML +=
+		albumsRow.innerHTML +=
 			`
-			<div class="albums-item">
-			${album.title}
+			<div id="album_${album.id}" class="albums-item">
+				${album.title}
 			</div>
 			`
+	})
+}
+
+const getСomments = async (postId) => {
+	const response = await fetch(
+		`https://jsonplaceholder.typicode.com/comments?postId=${postId}`
+	)
+	const comments = await response.json()
+	//renderComments(comments)
+}
+
+const renderComments = (comments) => {
+	const usersComments = document.querySelector('#users-comments')
+	usersComments.innerHTML = ""
+	comments.forEach(comment => {
+		usersComments.innerHTML += `
+			<div>${comment.name}</div>
+		`
 	})
 }
 
@@ -173,6 +210,7 @@ const renderPosts = (posts) => {
 	todosCounter.innerHTML = posts.length
 	todos.innerHTML = ''
 	posts.forEach(post => {
+		getСomments(post.id)
 		document
 			.querySelector('#users-posts')
 			.innerHTML += `
@@ -182,11 +220,11 @@ const renderPosts = (posts) => {
 				</div>
 				<div class="user-post__title">${post.title}</div>
 				<div class="user-post__body">${post.body}</div>
+				<div class="user-post__comment"></div>				
 			</article>
 			`
 	})
 }
-
 
 const resourcesPanel = document.querySelector('.resources__panel')
 resourcesPanel.addEventListener('click', (event) => {
@@ -217,5 +255,48 @@ const toShow = (el) => {
 }
 
 
+body.addEventListener('click', (event) => {
+	const [, almumId] = event.target.id.split("_")
+	const [, photoId] = event.target.parentNode.id.split("_")
+	if (event.target.matches('.albums-item')) {
+		getPhotos(almumId)
+		photosGallery.style.display = 'flex'
+	}
+	else if (event.target.matches('.resources__panel-button')) {
+		photosGallery.style.display = 'none'
+	}
+	else if (event.target.parentNode.matches('.app__user')) {
+		photosGallery.style.display = 'none'
+	}
+	else if (event.target.parentNode.matches('.user-photo')) {
+		console.log(photoId)
+	}
+})
+
+const getPhotos = async (almumId) => {
+	const response = await fetch(
+		`https://jsonplaceholder.typicode.com/photos?albumId=${almumId}`
+	)
+	const photos = await response.json()
+	renderPhotos(photos)
+}
+
+const renderPhotos = (photos) => {
+	photosGallery.innerHTML = ''
+
+	photos.forEach(photo => {
+		photosGallery.innerHTML += `
+			<div id="photo_${photo.id}" class="user-photo">
+				<div class="user-photo__img">
+					<img src="${photo.thumbnailUrl}">
+				</div>
+				<div class="user-photo__title">${photo.title}</div>
+			</div>
+		`
+	})
+	const usersResourcesBody = document.querySelector('.users-resources__body')
+	let minHeight = usersResourcesBody.scrollHeight
+	usersResourcesBody.style.minHeight = minHeight + 'px'
+}
 
 getUsers()
