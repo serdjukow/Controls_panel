@@ -21,13 +21,6 @@ const getUsers = async () => {
 	userListener()
 }
 
-/* 
-* sefsfsefs
-! sefse  
-? sefse 
-todo adwaw
-*/
-
 const usersBlock = document.querySelector('#users')
 const renderUsers = (users) => {
 	users.forEach(user => {
@@ -187,22 +180,29 @@ const renderAlbums = (albums) => {
 	})
 }
 
-const getСomments = async (postId) => {
-	const response = await fetch(
-		`https://jsonplaceholder.typicode.com/comments?postId=${postId}`
-	)
-	const comments = await response.json()
-	//renderComments(comments)
-}
+const commentsLoader = (id) => {
+	const getСomments = async (postId) => {
+		const response = await fetch(
+			`https://jsonplaceholder.typicode.com/comments?postId=${postId}`
+		)
+		const comments = await response.json()
+		renderComments(comments)
+	}
 
-const renderComments = (comments) => {
-	const usersComments = document.querySelector('#users-comments')
-	usersComments.innerHTML = ""
-	comments.forEach(comment => {
-		usersComments.innerHTML += `
+	const usersCommentsContainer = document.createElement('div')
+	usersCommentsContainer.className = 'users-comments-container'
+	const renderComments = (comments) => {
+		let output = ''
+		comments.forEach(comment => {
+			output += `
 			<div>${comment.name}</div>
-		`
-	})
+		 `
+		})
+		usersCommentsContainer.innerHTML = output
+	}
+	getСomments(id)
+	console.log(usersCommentsContainer)
+	return usersCommentsContainer
 }
 
 const getPosts = async (id) => {
@@ -219,7 +219,6 @@ const renderPosts = (posts) => {
 	todosCounter.innerHTML = posts.length
 	todos.innerHTML = ''
 	posts.forEach(post => {
-		getСomments(post.id)
 		document
 			.querySelector('#users-posts')
 			.innerHTML += `
@@ -229,7 +228,7 @@ const renderPosts = (posts) => {
 				</div>
 				<div class="user-post__title">${post.title}</div>
 				<div class="user-post__body">${post.body}</div>
-				<div class="user-post__comment"></div>				
+				<div class="user-post__comment">${commentsLoader(post.id)}</div>
 			</article>
 			`
 	})
