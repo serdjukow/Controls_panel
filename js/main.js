@@ -21,6 +21,13 @@ const getUsers = async () => {
 	userListener()
 }
 
+/* 
+* sefsfsefs
+! sefse  
+? sefse 
+todo adwaw
+*/
+
 const usersBlock = document.querySelector('#users')
 const renderUsers = (users) => {
 	users.forEach(user => {
@@ -46,8 +53,10 @@ const renderUsers = (users) => {
 const addActive = (el) => {
 	if (!el.classList.contains('active')) {
 		el.classList.add('active')
-		let currentUserId = `${el.id}`
-		localStorage.setItem("UserKey", JSON.stringify(currentUserId))
+		if (el.classList.contains('app__user')) {
+			let currentUserId = `${el.id}`
+			localStorage.setItem("UserKey", JSON.stringify(currentUserId))
+		}
 	}
 }
 
@@ -80,7 +89,7 @@ const userListener = () => {
 			getUsersInfo(id)
 			getTodos(id)
 			getAlbums(id)
-			getPosts(id)			
+			getPosts(id)
 		})
 	}
 	if (currentUserId) {
@@ -114,12 +123,12 @@ const renderUsersInfo = (comments) => {
 			`
 		<h4 class="user-full__title">${element.name}</h4>
 		<div class="user-full__info">
-		  <div class="user-item user-email"><span>Email: </span>${element.email}</div>
-		  <div class="user-item user-phone"><span>Phone: </span>${element.phone}</div>
-		  <div class="user-item user-website"><span>Website: </span>${element.website}</div>
-		  <div class="user-item user-city"><span>City: </span>${element.address.city}</div>
-		  <div class="user-item user-city"><span>Company: </span>${element.company.name}</div>
-		  <div class="user-item user-city"><span>Catch Phrase: </span>${element.company.catchPhrase}</div>
+		  <div class="user-item"><span>Email: </span><a href="mailto:${element.email}">${element.email}</a></div>
+		  <div class="user-item"><span>Phone: </span><a href="tel:${element.phone}">${element.phone}</a></div>
+		  <div class="user-item"><span>Website: </span><a href="${element.website}" target="_blanck">${element.website}</a></div>
+		  <div class="user-item"><span>City: </span>${element.address.city}</div>
+		  <div class="user-item"><span>Company: </span>${element.company.name}</div>
+		  <div class="user-item"><span>Catch Phrase: </span>${element.company.catchPhrase}</div>
 		</div>
 		`
 	})
@@ -256,10 +265,10 @@ const toShow = (el) => {
 
 
 body.addEventListener('click', (event) => {
-	const [, almumId] = event.target.id.split("_")
+	const [, albumId] = event.target.id.split("_")
 	const [, photoId] = event.target.parentNode.id.split("_")
 	if (event.target.matches('.albums-item')) {
-		getPhotos(almumId)
+		getPhotos(albumId)
 		photosGallery.style.display = 'flex'
 	}
 	else if (event.target.matches('.resources__panel-button')) {
@@ -283,7 +292,6 @@ const getPhotos = async (almumId) => {
 
 const renderPhotos = (photos) => {
 	photosGallery.innerHTML = ''
-
 	photos.forEach(photo => {
 		photosGallery.innerHTML += `
 			<div id="photo_${photo.id}" class="user-photo">

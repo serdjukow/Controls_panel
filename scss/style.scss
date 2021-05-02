@@ -361,6 +361,14 @@ body {
 .user-item {
 	padding: 5px;
 	letter-spacing: 1.5px;
+	a {
+		text-decoration: none;
+		color: inherit;
+		transition: text-decoration .3s;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
 }
 
 $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;

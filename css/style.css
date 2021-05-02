@@ -410,6 +410,19 @@ body {
   letter-spacing: 1.5px;
 }
 
+.user-item a {
+  text-decoration: none;
+  color: inherit;
+  -webkit-transition: -webkit-text-decoration .3s;
+  transition: -webkit-text-decoration .3s;
+  transition: text-decoration .3s;
+  transition: text-decoration .3s, -webkit-text-decoration .3s;
+}
+
+.user-item a:hover {
+  text-decoration: underline;
+}
+
 .user-item:nth-child(6n + 1) {
   color: #f78b00;
 }
