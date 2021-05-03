@@ -3,10 +3,10 @@ const photosGallery = document.querySelector('#photos-gallery')
 const albumsRow = document.querySelector('#users-albums')
 
 const currentDate = document.querySelector('.currentDate-count')
-let Data = new Date();
-let Year = Data.getFullYear();
-let Month = Data.getMonth();
-let Day = Data.getDate();
+let Data = new Date()
+let Year = Data.getFullYear()
+let Month = Data.getMonth()
+let Day = Data.getDate()
 currentDate.innerHTML =
 	`
 ${Day} / ${Month + 1} / ${Year}
@@ -86,12 +86,12 @@ const userListener = () => {
 		})
 	}
 	if (currentUserId) {
-		removeActive()
 		const usersListawd = document.querySelectorAll('.app__user')
 		for (let user of usersListawd) {
 			const [, userId] = user.id.split("_")
 			if (user.id == currentUserId) {
-				user.classList.add('active')
+				removeActive()
+				addActive(user)
 				getUsersInfo(userId)
 				getTodos(userId)
 				getAlbums(userId)
@@ -191,17 +191,20 @@ const commentsLoader = (id) => {
 
 	const usersCommentsContainer = document.createElement('div')
 	usersCommentsContainer.className = 'users-comments-container'
+
 	const renderComments = (comments) => {
-		let output = ''
+		usersCommentsContainer.innerHTML = ''
 		comments.forEach(comment => {
-			output += `
-			<div>${comment.name}</div>
-		 `
+			usersCommentsContainer.innerHTML += `
+			<div class="users-comments">
+				<div class="comment-item comment-item-name">${comment.name}</div>
+				<div class="comment-item comment-item-email">${comment.email}</div>
+				<div class="comment-item comment-item-body">${comment.body}</div>
+			</div>
+			`
 		})
-		usersCommentsContainer.innerHTML = output
 	}
 	getСomments(id)
-	console.log(usersCommentsContainer)
 	return usersCommentsContainer
 }
 
@@ -214,25 +217,51 @@ const getPosts = async (id) => {
 }
 getPosts(1)
 const renderPosts = (posts) => {
-	const todos = document.querySelector('#users-posts')
-	const todosCounter = document.querySelector('.posts-count')
-	todosCounter.innerHTML = posts.length
-	todos.innerHTML = ''
-	posts.forEach(post => {
-		document
-			.querySelector('#users-posts')
-			.innerHTML += `
+	const $postCounter = document.querySelector('.posts-count')
+	$postCounter.innerHTML = posts.length
+/* 	posts.forEach(post => {
+		$post.innerHTML += `
 			<article class="user-post">
 				<div class="user-post__icon">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
 				</div>
 				<div class="user-post__title">${post.title}</div>
 				<div class="user-post__body">${post.body}</div>
-				<div class="user-post__comment">${commentsLoader(post.id)}</div>
+				<div class="user-post__comment">${commentsLoader(post.id).outerHTML}</div>
 			</article>
 			`
-	})
+	}) */
+
+	const usersPost = document.querySelector('#users-posts')
+	posts.forEach(post => {
+		const userPost = document.createElement('article')
+		userPost.className = 'user-post'
+		const userPostIcon = document.createElement('div')
+		userPostIcon.className = 'user-post__icon'
+		userPostIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>'
+		
+		const userPostTitle = document.createElement('div')
+		userPostTitle.className = 'user-post__title'
+		userPostTitle.innerText = post.title
+
+		const userPostbody = document.createElement('div')
+		userPostbody.className = 'user-post__body'
+		userPostbody.innerText = post.body
+
+		const userPostComment = document.createElement('div')
+		userPostComment.className = 'user-post__comment'
+		userPostComment.appendChild(commentsLoader(post.id))
+
+		userPost.appendChild(userPostIcon)
+		userPost.appendChild(userPostTitle)
+		userPost.appendChild(userPostbody)
+		userPost.appendChild(userPostComment)
+
+		usersPost.appendChild(userPost)		
+	}) 
+	
 }
+
 
 const resourcesPanel = document.querySelector('.resources__panel')
 resourcesPanel.addEventListener('click', (event) => {

@@ -364,7 +364,7 @@ body {
 	a {
 		text-decoration: none;
 		color: inherit;
-		transition: text-decoration .3s;
+		transition: text-decoration 0.3s;
 		&:hover {
 			text-decoration: underline;
 		}
@@ -383,7 +383,7 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	.user-post {
-		flex: 0 0 300px;
+		flex: 0 0 48%;
 		background-color: #fff;
 		box-shadow: 0px 3px 20px #0000000b;
 		padding: 20px;
@@ -416,12 +416,40 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 			margin-bottom: 20px;
 		}
 	}
-	.feather {
+
+	.users-comments {
+		padding: 10px;
+		margin-bottom: 10px;
+		background-color: rgb(190, 190, 190);
+		border-radius: 10px;
 	}
-	.feather-message-square {
+	.comment-item {
+	}
+	.comment-item-name {
+	}
+	.comment-item-email {
+		font-size: 12px;
+		color: #2e51bb;
+	}
+	.comment-item-body {
+		font-size: 14px;
+		font-style: italic;
 	}
 }
-
+@media (max-width: 1200px) {
+	.users-posts {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+		.user-post {
+			flex: 0 0 100%;
+			background-color: #fff;
+			box-shadow: 0px 3px 20px #0000000b;
+			padding: 20px;
+			margin: 5px;
+		}
+	}
+}
 .user-todo {
 	background-color: #fff;
 	box-shadow: 0px 3px 20px #0000000b;
@@ -443,13 +471,13 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 	background-color: #fff;
 }
 .user-photo {
-	position: relative;	
+	position: relative;
 	width: 150px;
 	height: 150px;
-	text-align: center;	
+	text-align: center;
 	box-sizing: border-box;
 	overflow: hidden;
-	
+
 	// .user-photo__img
 
 	&__img {
@@ -464,8 +492,8 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: rgba(#1c3faa, .9);
-		color:#fff;
+		background-color: rgba(#1c3faa, 0.9);
+		color: #fff;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -477,9 +505,9 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 		cursor: pointer;
 		user-select: none;
 		letter-spacing: 1.2px;
-		transition: background .3s ease-in-out;
+		transition: background 0.3s ease-in-out;
 		&:hover {
-			background: rgba(#1c3faa, .0);
+			background: rgba(#1c3faa, 0);
 			color: transparent;
 		}
 	}
