@@ -216,23 +216,12 @@ const getPosts = async (id) => {
 	renderPosts(posts)
 }
 getPosts(1)
+
 const renderPosts = (posts) => {
 	const $postCounter = document.querySelector('.posts-count')
 	$postCounter.innerHTML = posts.length
-/* 	posts.forEach(post => {
-		$post.innerHTML += `
-			<article class="user-post">
-				<div class="user-post__icon">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-				</div>
-				<div class="user-post__title">${post.title}</div>
-				<div class="user-post__body">${post.body}</div>
-				<div class="user-post__comment">${commentsLoader(post.id).outerHTML}</div>
-			</article>
-			`
-	}) */
-
 	const usersPost = document.querySelector('#users-posts')
+	usersPost.innerHTML = ""
 	posts.forEach(post => {
 		const userPost = document.createElement('article')
 		userPost.className = 'user-post'
@@ -256,7 +245,6 @@ const renderPosts = (posts) => {
 		userPost.appendChild(userPostTitle)
 		userPost.appendChild(userPostbody)
 		userPost.appendChild(userPostComment)
-
 		usersPost.appendChild(userPost)		
 	}) 
 	
@@ -304,9 +292,6 @@ body.addEventListener('click', (event) => {
 	}
 	else if (event.target.parentNode.matches('.app__user')) {
 		photosGallery.style.display = 'none'
-	}
-	else if (event.target.parentNode.matches('.user-photo')) {
-		console.log(photoId)
 	}
 })
 

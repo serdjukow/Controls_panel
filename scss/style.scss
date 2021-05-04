@@ -1,7 +1,8 @@
 $textColor: #ffffff;
 $backgroundColor: #1c3faa;
+$backgroundColor_2: #a1a1a1;
 $accent: tomato;
-
+$boxShadow:#0000000b;
 * {
 	box-sizing: border-box;
 }
@@ -67,7 +68,7 @@ body {
 			display: block;
 			width: 92%;
 			height: 1px;
-			background-color: #2e51bb;
+			background-color: $backgroundColor;
 			position: absolute;
 			bottom: 0;
 			left: 50%;
@@ -85,7 +86,7 @@ body {
 			display: block;
 			width: 98%;
 			height: 1px;
-			background-color: #dee7ef;
+			background-color: $backgroundColor_2;
 			position: absolute;
 			bottom: 0;
 			left: 50%;
@@ -131,12 +132,6 @@ body {
 			width: 100%;
 		}
 	}
-
-	.currentDate-count {
-	}
-}
-
-.users-resources {
 }
 
 .resources {
@@ -156,8 +151,8 @@ body {
 
 	&__panel {
 		display: flex;
-		background-color: #fff;
-		box-shadow: 0px 3px 20px #0000000b;
+		background-color: $textColor;
+		box-shadow: 0px 3px 20px $boxShadow;
 		padding: 10px;
 		margin-bottom: 20px;
 		border-radius: 10px;
@@ -177,10 +172,10 @@ body {
 		transition: background 0.2s ease-in-out;
 		&.active,
 		&:hover {
-			color: #fff;
-			background-color: #1c3faa;
+			color: $textColor;
+			background-color: $backgroundColor;
 			.resources__icon {
-				color: #fff;
+				color: $textColor;
 			}
 		}
 	}
@@ -219,16 +214,14 @@ body {
 		opacity: 1;
 	}
 }
-.users-todos {
-}
+
 .users-albums {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-evenly;
 	.albums-item {
-		color: #fff;
-		//background-color: #fff;
-		box-shadow: 0px 3px 20px #0000000b;
+		color: $textColor;
+		box-shadow: 0px 3px 20px $boxShadow;
 		width: 150px;
 		height: 150px;
 		background-image: url(../images/folder.svg);
@@ -250,8 +243,6 @@ body {
 		}
 	}
 }
-.users-posts {
-}
 
 .app {
 	padding: 0px 20px 20px;
@@ -261,11 +252,6 @@ body {
 		display: flex;
 		width: 100%;
 		margin: 0 auto;
-	}
-
-	// .app__column
-
-	&__column {
 	}
 
 	// .app__users
@@ -293,7 +279,7 @@ body {
 		margin-right: 10px;
 	}
 	&:hover {
-		background-color: #2e51bb;
+		background: lighten($backgroundColor, 7%);
 	}
 	&.active {
 		background-color: #f1f5f8;
@@ -353,9 +339,9 @@ body {
 		padding: 10px;
 		color: #718096;
 		margin: -5px -5px 20px;
-		background-color: #fff;
+		background-color: $textColor;
 		border-radius: 10px;
-		box-shadow: 0px 3px 20px #0000000b;
+		box-shadow: 0px 3px 20px $boxShadow;
 	}
 }
 .user-item {
@@ -384,8 +370,8 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 	justify-content: space-evenly;
 	.user-post {
 		flex: 0 0 48%;
-		background-color: #fff;
-		box-shadow: 0px 3px 20px #0000000b;
+		background-color: $textColor;
+		box-shadow: 0px 3px 20px $boxShadow;
 		padding: 20px;
 		margin: 5px;
 
@@ -393,7 +379,7 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 
 		&__icon {
 			width: 35px;
-			color: #1c3faa;
+			color: $backgroundColor;
 			svg {
 				width: 100%;
 				height: auto;
@@ -417,22 +403,39 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 		}
 	}
 
+	.users-comments-container {
+		display: flex;
+		flex-direction: column;
+		max-height: 140px;
+		overflow-y: auto;		
+	}
 	.users-comments {
 		padding: 10px;
 		margin-bottom: 10px;
-		background-color: rgb(190, 190, 190);
+		background-color: rgb(230, 230, 230);
+		color: #717172;
 		border-radius: 10px;
+		max-width: 70%;		
 	}
-	.comment-item {
+
+	$alignSelf: flex-start, flex-end;
+	@for $i from 1 through length($alignSelf) {
+		.users-comments:nth-child(#{length($alignSelf)}n + #{$i}) {
+			align-self: nth($alignSelf, $i);
+		}
 	}
+
 	.comment-item-name {
+		font-size: 12px;
+		margin-bottom: 3px;
 	}
 	.comment-item-email {
-		font-size: 12px;
-		color: #2e51bb;
+		font-size: 10px;
+		color: lighten($color: $backgroundColor, $amount: 7%);
+		margin-bottom: 5px;
 	}
 	.comment-item-body {
-		font-size: 14px;
+		font-size: 10px;
 		font-style: italic;
 	}
 }
@@ -443,19 +446,20 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 		justify-content: space-evenly;
 		.user-post {
 			flex: 0 0 100%;
-			background-color: #fff;
-			box-shadow: 0px 3px 20px #0000000b;
+			background-color: $textColor;
+			box-shadow: 0px 3px 20px $boxShadow;
 			padding: 20px;
 			margin: 5px;
 		}
 	}
 }
 .user-todo {
-	background-color: #fff;
-	box-shadow: 0px 3px 20px #0000000b;
-	padding: 10px 15px;
+	background-color: $textColor;
+	box-shadow: 0px 3px 20px $boxShadow;
+	padding: 7px 10px;
 	margin-bottom: 5px;
 	border-radius: 5px;
+	font-size: 12px;
 }
 .completed {
 	text-decoration: line-through;
@@ -468,7 +472,7 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-color: #fff;
+	background-color: $textColor;
 }
 .user-photo {
 	position: relative;
@@ -492,8 +496,8 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: rgba(#1c3faa, 0.9);
-		color: #fff;
+		background-color: rgba($backgroundColor, 0.9);
+		color: $textColor;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -507,7 +511,7 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 		letter-spacing: 1.2px;
 		transition: background 0.3s ease-in-out;
 		&:hover {
-			background: rgba(#1c3faa, 0);
+			background: rgba($backgroundColor, 0);
 			color: transparent;
 		}
 	}
