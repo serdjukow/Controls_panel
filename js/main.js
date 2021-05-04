@@ -197,9 +197,9 @@ const commentsLoader = (id) => {
 	usersCommentsItems.className = 'users-comments-items'
 
 	const renderComments = (comments) => {
-		usersCommentsContainer.innerHTML = ''
+		usersCommentsItems.innerHTML = ''
 		comments.forEach(comment => {
-			usersCommentsContainer.innerHTML += `
+			usersCommentsItems.innerHTML += `
 			<div class="users-comments">
 				<div class="comment-item comment-item-name">${comment.name}</div>
 				<div class="comment-item comment-item-email">${comment.email}</div>
@@ -211,6 +211,7 @@ const commentsLoader = (id) => {
 		const usersCommentsCount = document.createElement('div')
 		usersCommentsCount.innerHTML = `<div class="users-comments-count">${comments.length}</div>`
 		usersCommentsContainer.appendChild(usersCommentsCount)
+		usersCommentsContainer.appendChild(usersCommentsItems)
 	}
 	getСomments(id)
 	return usersCommentsContainer
@@ -249,8 +250,8 @@ const renderPosts = (posts) => {
 		userPost.appendChild(userPostTitle)
 		userPost.appendChild(userPostbody)
 		userPost.appendChild(userPostComment)
-		usersPost.appendChild(userPost)		
-	}) 
+		usersPost.appendChild(userPost)
+	})
 }
 
 const resourcesPanel = document.querySelector('.resources__panel')

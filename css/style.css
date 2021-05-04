@@ -493,6 +493,10 @@ body {
 
 .users-posts .users-comments-container {
   position: relative;
+}
+
+.users-posts .users-comments-items {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -515,8 +519,11 @@ body {
           align-items: center;
   padding: 5px;
   top: 0px;
+  width: 100%;
+  background-color: #fff;
   color: #1c3faa;
   font-weight: 600;
+  z-index: 1;
 }
 
 .users-posts .users-comments-count::before {

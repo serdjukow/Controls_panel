@@ -402,8 +402,10 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 			margin-bottom: 10px;
 		}
 	}
-
 	.users-comments-container {
+		position: relative;
+	}
+	.users-comments-items {
 		position: relative;
 		display: flex;
 		flex-direction: column;
@@ -417,8 +419,11 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 		align-items: center;
 		padding: 5px;
 		top: 0px;
+		width: 100%;
+		background-color: #fff;
 		color: $backgroundColor;
 		font-weight: 600;
+		z-index: 1;
 		&::before {
 			content: "";
 			display: inline-block;
