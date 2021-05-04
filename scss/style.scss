@@ -2,7 +2,7 @@ $textColor: #ffffff;
 $backgroundColor: #1c3faa;
 $backgroundColor_2: #a1a1a1;
 $accent: tomato;
-$boxShadow:#0000000b;
+$boxShadow: #0000000b;
 * {
 	box-sizing: border-box;
 }
@@ -399,15 +399,38 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 			font-size: 14px;
 			font-style: italic;
 			color: #718096;
-			margin-bottom: 20px;
+			margin-bottom: 10px;
 		}
 	}
 
 	.users-comments-container {
+		position: relative;
 		display: flex;
 		flex-direction: column;
-		max-height: 140px;
-		overflow-y: auto;		
+		max-height: 160px;
+		overflow-y: auto;
+		padding-top: 30px;
+	}
+	.users-comments-count {
+		position: absolute;
+		display: flex;
+		align-items: center;
+		padding: 5px;
+		top: 0px;
+		color: $backgroundColor;
+		font-weight: 600;
+		&::before {
+			content: "";
+			display: inline-block;
+			margin-right: 5px;
+			width: 18px;
+			height: 18px;
+			background-image: url("../images/comments.svg");
+			background-position: center;
+			background-size: cover;
+			background-repeat: no-repeat;
+			color: $backgroundColor;
+		}
 	}
 	.users-comments {
 		padding: 10px;
@@ -415,7 +438,7 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 		background-color: rgb(230, 230, 230);
 		color: #717172;
 		border-radius: 10px;
-		max-width: 70%;		
+		max-width: 80%;
 	}
 
 	$alignSelf: flex-start, flex-end;

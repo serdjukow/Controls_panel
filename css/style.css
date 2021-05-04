@@ -488,10 +488,11 @@ body {
   font-size: 14px;
   font-style: italic;
   color: #718096;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .users-posts .users-comments-container {
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -499,8 +500,36 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  max-height: 140px;
+  max-height: 160px;
   overflow-y: auto;
+  padding-top: 30px;
+}
+
+.users-posts .users-comments-count {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px;
+  top: 0px;
+  color: #1c3faa;
+  font-weight: 600;
+}
+
+.users-posts .users-comments-count::before {
+  content: "";
+  display: inline-block;
+  margin-right: 5px;
+  width: 18px;
+  height: 18px;
+  background-image: url("../images/comments.svg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #1c3faa;
 }
 
 .users-posts .users-comments {
@@ -509,7 +538,7 @@ body {
   background-color: #e6e6e6;
   color: #717172;
   border-radius: 10px;
-  max-width: 70%;
+  max-width: 80%;
 }
 
 .users-posts .users-comments:nth-child(2n + 1) {

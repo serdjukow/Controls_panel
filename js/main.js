@@ -164,6 +164,7 @@ const getAlbums = async (id) => {
 	const albums = await response.json()
 	renderAlbums(albums)
 }
+
 getAlbums(1)
 const renderAlbums = (albums) => {
 	const albumsRow = document.querySelector('#users-albums')
@@ -192,6 +193,9 @@ const commentsLoader = (id) => {
 	const usersCommentsContainer = document.createElement('div')
 	usersCommentsContainer.className = 'users-comments-container'
 
+	const usersCommentsItems = document.createElement('div')
+	usersCommentsItems.className = 'users-comments-items'
+
 	const renderComments = (comments) => {
 		usersCommentsContainer.innerHTML = ''
 		comments.forEach(comment => {
@@ -203,6 +207,10 @@ const commentsLoader = (id) => {
 			</div>
 			`
 		})
+
+		const usersCommentsCount = document.createElement('div')
+		usersCommentsCount.innerHTML = `<div class="users-comments-count">${comments.length}</div>`
+		usersCommentsContainer.appendChild(usersCommentsCount)
 	}
 	getСomments(id)
 	return usersCommentsContainer
@@ -228,28 +236,22 @@ const renderPosts = (posts) => {
 		const userPostIcon = document.createElement('div')
 		userPostIcon.className = 'user-post__icon'
 		userPostIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>'
-		
 		const userPostTitle = document.createElement('div')
 		userPostTitle.className = 'user-post__title'
 		userPostTitle.innerText = post.title
-
 		const userPostbody = document.createElement('div')
 		userPostbody.className = 'user-post__body'
 		userPostbody.innerText = post.body
-
 		const userPostComment = document.createElement('div')
 		userPostComment.className = 'user-post__comment'
 		userPostComment.appendChild(commentsLoader(post.id))
-
 		userPost.appendChild(userPostIcon)
 		userPost.appendChild(userPostTitle)
 		userPost.appendChild(userPostbody)
 		userPost.appendChild(userPostComment)
 		usersPost.appendChild(userPost)		
 	}) 
-	
 }
-
 
 const resourcesPanel = document.querySelector('.resources__panel')
 resourcesPanel.addEventListener('click', (event) => {
@@ -278,7 +280,6 @@ const toShow = (el) => {
 		}
 	}
 }
-
 
 body.addEventListener('click', (event) => {
 	const [, albumId] = event.target.id.split("_")
