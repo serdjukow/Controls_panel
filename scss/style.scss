@@ -411,14 +411,11 @@ $colors: #f78b00, #1c3faa, #fbc500, #91c714, #d34a4a, #c714c7;
 		flex-direction: column;
 		max-height: 160px;
 		overflow-y: auto;
-		padding-top: 30px;
 	}
 	.users-comments-count {
-		position: absolute;
 		display: flex;
 		align-items: center;
-		padding: 5px;
-		top: 0px;
+		padding: 10px;
 		width: 100%;
 		background-color: #fff;
 		color: $backgroundColor;
