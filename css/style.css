@@ -276,7 +276,7 @@ body {
 
 .users-resources__item.toShow {
   position: relative;
-  padding: 20px;
+  padding: 0 10px;
   width: 100%;
   opacity: 1;
 }
