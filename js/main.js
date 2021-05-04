@@ -122,6 +122,7 @@ const renderUsersInfo = (comments) => {
 		  <div class="user-item"><span>City: </span>${element.address.city}</div>
 		  <div class="user-item"><span>Company: </span>${element.company.name}</div>
 		  <div class="user-item"><span>Catch Phrase: </span>${element.company.catchPhrase}</div>
+		  <div class="user-item"><span>BS: </span>${element.company.bs}</div>
 		</div>
 		`
 	})
@@ -192,7 +193,6 @@ const commentsLoader = (id) => {
 
 	const usersCommentsContainer = document.createElement('div')
 	usersCommentsContainer.className = 'users-comments-container'
-
 	const usersCommentsItems = document.createElement('div')
 	usersCommentsItems.className = 'users-comments-items'
 
@@ -207,7 +207,6 @@ const commentsLoader = (id) => {
 			</div>
 			`
 		})
-
 		const usersCommentsCount = document.createElement('div')
 		usersCommentsCount.innerHTML = `<div class="users-comments-count">${comments.length}</div>`
 		usersCommentsContainer.appendChild(usersCommentsCount)
